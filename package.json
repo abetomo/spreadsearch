@@ -19,5 +19,13 @@
   "bugs": {
     "url": "https://github.com/abetomo/spreadsearch/issues"
   },
-  "homepage": "https://github.com/abetomo/spreadsearch#readme"
+  "homepage": "https://github.com/abetomo/spreadsearch#readme",
+  "dependencies": {
+    "nroonga": "^0.3.0",
+    "ss2json": "^1.1.0"
+  },
+  "devDependencies": {
+    "jest": "^21.1.0",
+    "standard": "^10.0.3"
+  }
 }
