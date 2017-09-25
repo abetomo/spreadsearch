@@ -1,0 +1,23 @@
+{
+  "name": "@abetomo/spreadsearch",
+  "version": "0.0.1",
+  "description": "Search Google Spreadsheet data using Groonga.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abetomo/spreadsearch.git"
+  },
+  "keywords": [
+    "spreadsheet",
+    "groonga"
+  ],
+  "author": "abetomo",
+  "license": "LGPL-2.1",
+  "bugs": {
+    "url": "https://github.com/abetomo/spreadsearch/issues"
+  },
+  "homepage": "https://github.com/abetomo/spreadsearch#readme"
+}
