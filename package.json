@@ -30,8 +30,8 @@
     "ss2json": "^1.1.0"
   },
   "devDependencies": {
-    "jest": "^21.1.0",
-    "standard": "^10.0.3"
+    "jest": "",
+    "standard": ""
   },
   "publishConfig": {
     "access": "public"
