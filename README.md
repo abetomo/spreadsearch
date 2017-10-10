@@ -27,7 +27,7 @@ Please set it to `config.json`.
 
 ### Update data
 ```
-% spreadsearch dataUpdate
+% spreadsearch update
 ```
 
 Get data from the spreadsheet and make it searchable.
