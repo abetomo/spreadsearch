@@ -6,10 +6,18 @@ const ss = new (require('..'))()
 
 const [name, type] = (() => {
   switch (process.argv.length) {
-    case 3: return ['default', process.argv[2]]
+    case 3:
+      switch (process.argv[2]) {
+        case 'init':
+        case 'clean':
+        case 'update':
+        case 'help':
+        return ['default', process.argv[2]]
+      }
+      return [process.argv[2]]
     case 4: return [process.argv[2], process.argv[3]]
   }
-  return ['default', null]
+  return ['default']
 })()
 
 if (type === 'init') {
