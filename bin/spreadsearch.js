@@ -3,6 +3,7 @@
 'use strict'
 
 const ss = new (require('..'))()
+const usage = 'spreadsearch [NAME] init|clean|update'
 
 const [name, type] = (() => {
   switch (process.argv.length) {
@@ -20,6 +21,11 @@ const [name, type] = (() => {
   return ['default']
 })()
 
+if (type === 'help') {
+  console.log(usage)
+  process.exit(0)
+}
+
 if (type === 'init') {
   ss.init()
   console.log(`Please set the '${ss.dotDir.configPath()}'.`)
@@ -27,6 +33,7 @@ if (type === 'init') {
 }
 
 if (ss.loadConfig(name) == null) {
+  console.log(usage)
   console.log(`Please run \`spreadsearch init\` and configure '${ss.dotDir.configPath()}'.`)
   process.exit(1)
 }
