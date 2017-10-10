@@ -13,7 +13,7 @@ const [name, type] = (() => {
         case 'clean':
         case 'update':
         case 'help':
-        return ['default', process.argv[2]]
+          return ['default', process.argv[2]]
       }
       return [process.argv[2]]
     case 4: return [process.argv[2], process.argv[3]]
