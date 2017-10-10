@@ -24,10 +24,10 @@ if (ss.loadConfig(name) == null) {
 }
 
 switch (type) {
-  case 'dataClean':
+  case 'clean':
     ss.dbClean()
     process.exit(0)
-  case 'dataUpdate':
+  case 'update':
     ss.dbUpdate()
       .then(() => process.exit(0))
       .catch(err => console.error(err))
