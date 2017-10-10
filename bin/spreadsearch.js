@@ -4,18 +4,26 @@
 
 const ss = new (require('..'))()
 
-if (process.argv[2] === 'init') {
+const [name, type] = (() => {
+  switch (process.argv.length) {
+    case 3: return ['default', process.argv[2]]
+    case 4: return [process.argv[2], process.argv[3]]
+  }
+  return ['default', null]
+})()
+
+if (type === 'init') {
   ss.init()
   console.log(`Please set the '${ss.dotDir.configPath()}'.`)
   process.exit(0)
 }
 
-if (ss.loadConfig() == null) {
+if (ss.loadConfig(name) == null) {
   console.log(`Please run \`spreadsearch init\` and configure '${ss.dotDir.configPath()}'.`)
   process.exit(1)
 }
 
-switch (process.argv[2]) {
+switch (type) {
   case 'dataClean':
     ss.dbClean()
     process.exit(0)
