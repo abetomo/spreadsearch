@@ -3,23 +3,10 @@
 'use strict'
 
 const ss = new (require('..'))()
-const usage = 'spreadsearch [NAME] init|clean|update'
+const usage = `spreadsearch [NAME] init|clean|update|console
+spreadsearch [NAME] search QUERY`
 
-const [name, type] = (() => {
-  switch (process.argv.length) {
-    case 3:
-      switch (process.argv[2]) {
-        case 'init':
-        case 'clean':
-        case 'update':
-        case 'help':
-          return ['default', process.argv[2]]
-      }
-      return [process.argv[2]]
-    case 4: return [process.argv[2], process.argv[3]]
-  }
-  return ['default']
-})()
+const [name, type, query] = ss.parseArgs(process.argv)
 
 if (type === 'help') {
   console.log(usage)
@@ -47,6 +34,13 @@ switch (type) {
       .then(() => process.exit(0))
       .catch(err => console.error(err))
     break
-  default:
+  case 'console':
     ss.console()
+    break
+  case 'search':
+    console.log(JSON.stringify(ss.search(query), null, '  '))
+    process.exit(0)
+  default:
+    console.log(usage)
+    process.exit(1)
 }

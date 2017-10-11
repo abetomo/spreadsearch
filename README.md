@@ -33,8 +33,15 @@ Please set it to `config.json`.
 Get data from the spreadsheet and make it searchable.
 
 ### Search
+#### batch
 ```
-% spreadsearch
+% spreadsearch search QUERY
+<Show JSON of search results>
+```
+
+#### console
+```
+% spreadsearch console
 Query> test
 ...Display results
 
