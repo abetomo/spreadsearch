@@ -38,7 +38,7 @@ switch (type) {
     ss.console()
     break
   case 'search':
-    console.log(ss.search(query))
+    console.log(JSON.stringify(ss.search(query), null, '  '))
     process.exit(0)
   default:
     console.log(usage)
