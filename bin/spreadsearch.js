@@ -4,7 +4,8 @@
 
 const ss = new (require('..'))()
 const usage = `spreadsearch [NAME] init|clean|update|console
-spreadsearch [NAME] search QUERY`
+spreadsearch [NAME] search QUERY
+spreadsearch list`
 
 const [name, type, query] = ss.parseArgs(process.argv)
 
@@ -26,6 +27,14 @@ if (ss.loadConfig(name) == null) {
 }
 
 switch (type) {
+  case 'list':
+    console.log('List of names >>>')
+    console.log(
+      Object.keys(ss.dotDir.loadAllConfigs())
+        .map(name => `* ${name}`)
+        .join('\n')
+    )
+    process.exit(0)
   case 'clean':
     ss.dbClean()
     process.exit(0)
