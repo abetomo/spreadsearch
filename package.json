@@ -1,6 +1,6 @@
 {
   "name": "@abetomo/spreadsearch",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Search Google Spreadsheet data using Groonga.",
   "main": "index.js",
   "scripts": {
