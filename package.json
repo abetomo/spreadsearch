@@ -45,6 +45,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "jest": {
+    "testURL": "http://localhost/"
+  },
   "engines": {
     "node": ">= 6.0.0"
   }
