@@ -3,9 +3,7 @@ node_js:
  - '6'
  - '8'
  - '10'
-cache:
-  directories:
-    - node_modules
+cache: npm
 sudo: required
 before_install:
  - curl --silent --location https://github.com/groonga/groonga/raw/master/data/travis/setup.sh | sh
