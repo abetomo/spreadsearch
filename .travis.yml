@@ -4,6 +4,5 @@ node_js:
  - '10'
  - '12'
 cache: npm
-sudo: required
 before_install:
  - curl --silent --location https://github.com/groonga/groonga/raw/master/data/travis/setup.sh | sh
