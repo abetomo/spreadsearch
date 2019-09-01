@@ -14,6 +14,8 @@ jobs:
       with:
         node-version: '12.x'
         registry-url: 'https://registry.npmjs.org'
+    - name: setup groonga
+      run: curl --silent --location https://github.com/groonga/groonga/raw/master/data/travis/setup.sh | sh
     - run: npm install
     - run: npm publish
       env:
