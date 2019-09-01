@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: setup groonga
+      run: curl --silent --location https://github.com/groonga/groonga/raw/master/data/travis/setup.sh | sh
     - name: npm install, build, and test
       run: |
         npm install
