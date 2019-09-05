@@ -14,7 +14,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: setup groonga
+    - name: Setup Groonga
       run: curl --silent --location https://github.com/groonga/groonga/raw/master/data/travis/setup.sh | sh
     - name: npm install, build, and test
       run: |
@@ -33,6 +33,12 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
+        registry-url: 'https://registry.npmjs.org'
+    - name: Setup Groonga
+      run: curl --silent --location https://github.com/groonga/groonga/raw/master/data/travis/setup.sh | sh
+      if: contains(github.ref, 'tags/v')
+    - run: npm install
+      if: contains(github.ref, 'tags/v')
     - run: npm publish
       env:
         CI: true
