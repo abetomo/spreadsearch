@@ -4,25 +4,22 @@ on: [push]
 
 jobs:
   test:
+    name: Test on node ${{ matrix.node-version }} and ${{ matrix.os }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [8.x, 10.x, 12.x]
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
       with:
         node-version: ${{ matrix.node-version }}
     - name: Setup Groonga
       run: curl --silent --location https://github.com/groonga/groonga/raw/master/data/travis/setup.sh | sh
-    - name: npm install, build, and test
+    - name: npm install and test
       run: |
         npm install
-        npm run build --if-present
         npm test
-      env:
-        CI: true
 
   publish:
     name: npm publish
@@ -30,7 +27,7 @@ jobs:
     needs: [test]
     steps:
     - uses: actions/checkout@master
-    - uses: actions/setup-node@v1
+    - uses: actions/setup-node@master
       with:
         node-version: '12.x'
         registry-url: 'https://registry.npmjs.org'
@@ -41,6 +38,5 @@ jobs:
       if: contains(github.ref, 'tags/v')
     - run: npm publish
       env:
-        CI: true
         NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       if: contains(github.ref, 'tags/v')
