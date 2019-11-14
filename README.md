@@ -47,3 +47,7 @@ Query> test
 
 Query>
 ```
+
+## `config.json`
+### `authJsonPath`
+Use GCP service account credentials. You first need to create a service account, download its json key.
