@@ -16,59 +16,56 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Setup Groonga
       run: curl --silent --location https://github.com/groonga/groonga/raw/master/data/travis/setup.sh | sh
-    - name: npm install and test
-      run: |
-        npm install
-        npm test
+    - run: npm i -g npm
+    - run: npm ci
+    - run: npm test
 
   macos-test:
     runs-on: macos-latest
-    strategy:
-      matrix:
-        node-version: [8.x, 10.x, 12.x, 13.x]
     steps:
     - uses: actions/checkout@master
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@master
+    - uses: actions/setup-node@master
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 12
     - run: brew install groonga pkg-config
-    - name: npm install and test
-      run: |
-        npm install
-        npm test
+    - run: npm i -g npm
+    - run: npm ci
+    - run: npm test
       env:
         PKG_CONFIG_PATH: /usr/local/opt/groonga/lib/pkgconfig
 
   windows-test:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        node-version: [8.x, 10.x, 12.x, 13.x]
     steps:
     - uses: actions/checkout@master
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@master
+    - uses: actions/setup-node@master
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 12
     - name: Install Groonga
+      shell: bash
       run: |
-        set RELEASE_VERSION=9.0.8
-        set ARCHIVE=groonga-%RELEASE_VERSION%-x64-vs2017.zip
+        export RELEASE_VERSION=9.0.8
+        export ARCHIVE=groonga-${RELEASE_VERSION}-x64-vs2017.zip
 
         choco install -y curl 7zip.commandline
-        curl -OL https://github.com/groonga/groonga/releases/download/v%RELEASE_VERSION%/%ARCHIVE%
-        7z x %ARCHIVE%
-        del %ARCHIVE%
-        move groonga-* ..\groonga
+        curl -OL https://github.com/groonga/groonga/releases/download/v${RELEASE_VERSION}/${ARCHIVE}
+        ls
+        echo ${ARCHIVE}
+        7z x ${ARCHIVE}
+        rm ${ARCHIVE}
+        mv groonga-* ../groonga
     - run: npm i -g npm
     - run: npm config set msvs_version 2019
     - run: npm i -g node-gyp
-    - run: |
-        set GROONGA_PATH=%GITHUB_WORKSPACE%\..\groonga
-        npm install
-    - run: |
-        set GROONGA_PATH=%GITHUB_WORKSPACE%\..\groonga
+    - name: npm ci
+      shell: bash
+      run: |
+        export GROONGA_PATH=${GITHUB_WORKSPACE}/../groonga
+        npm ci
+    - name: npm test
+      shell: bash
+      run: |
+        export GROONGA_PATH=${GITHUB_WORKSPACE}/../groonga
         npm test
 
   publish:
@@ -79,12 +76,12 @@ jobs:
     - uses: actions/checkout@master
     - uses: actions/setup-node@master
       with:
-        node-version: '12.x'
+        node-version: 12
         registry-url: 'https://registry.npmjs.org'
     - name: Setup Groonga
       run: curl --silent --location https://github.com/groonga/groonga/raw/master/data/travis/setup.sh | sh
       if: contains(github.ref, 'tags/v')
-    - run: npm install
+    - run: npm ci
       if: contains(github.ref, 'tags/v')
     - run: npm publish
       env:
