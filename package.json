@@ -26,11 +26,11 @@
   },
   "homepage": "https://github.com/abetomo/spreadsearch#readme",
   "dependencies": {
-    "nroonga": "^0.4.1",
-    "ss2json": "^3.0.4"
+    "nroonga": "^0.4.2",
+    "ss2json": "^3.0.6"
   },
   "devDependencies": {
-    "jest": "^24.9.0",
+    "jest": "^25.1.0",
     "standard": "^14.3.1"
   },
   "files": [
