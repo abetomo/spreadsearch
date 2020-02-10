@@ -49,7 +49,6 @@ jobs:
 
         choco install -y curl 7zip.commandline
         curl -OL https://github.com/groonga/groonga/releases/download/v${RELEASE_VERSION}/${ARCHIVE}
-        ls
         echo ${ARCHIVE}
         7z x ${ARCHIVE}
         rm ${ARCHIVE}
