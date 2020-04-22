@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [8.x, 10.x, 12.x, 13.x]
+        node-version: [8.x, 10.x, 12.x, 14.x]
     steps:
     - uses: actions/checkout@master
     - name: Use Node.js ${{ matrix.node-version }}
@@ -41,7 +41,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: actions/setup-node@master
       with:
-        node-version: 12
+        node-version: 14
     - name: Install Groonga
       shell: bash
       run: |
@@ -76,7 +76,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: actions/setup-node@master
       with:
-        node-version: 12
+        node-version: 14
         registry-url: 'https://registry.npmjs.org'
     - name: Setup Groonga
       run: curl --silent --location https://github.com/groonga/groonga/raw/master/data/travis/setup.sh | sh
