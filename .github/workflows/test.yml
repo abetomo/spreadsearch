@@ -1,4 +1,4 @@
-name: Node CI
+name: Test
 
 on: [push, pull_request]
 
@@ -45,7 +45,7 @@ jobs:
     - name: Install Groonga
       shell: bash
       run: |
-        export RELEASE_VERSION=9.0.8
+        export RELEASE_VERSION=10.0.8
         export ARCHIVE=groonga-${RELEASE_VERSION}-x64-vs2017.zip
 
         choco install -y curl 7zip.commandline
@@ -67,23 +67,3 @@ jobs:
       run: |
         export GROONGA_PATH=${GITHUB_WORKSPACE}/../groonga
         npm test
-
-  publish:
-    name: npm publish
-    runs-on: ubuntu-latest
-    needs: [ubuntu-test, macos-test, windows-test]
-    steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
-      with:
-        node-version: 14
-        registry-url: 'https://registry.npmjs.org'
-    - name: Setup Groonga
-      run: curl --silent --location https://github.com/groonga/groonga/raw/master/data/travis/setup.sh | sh
-      if: contains(github.ref, 'tags/v')
-    - run: npm ci
-      if: contains(github.ref, 'tags/v')
-    - run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      if: contains(github.ref, 'tags/v')
