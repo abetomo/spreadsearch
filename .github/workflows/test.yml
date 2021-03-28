@@ -45,12 +45,10 @@ jobs:
     - name: Install Groonga
       shell: bash
       run: |
-        export RELEASE_VERSION=10.0.8
-        export ARCHIVE=groonga-${RELEASE_VERSION}-x64-vs2017.zip
+        export ARCHIVE=groonga-latest-x64-vs2019.zip
 
         choco install -y curl 7zip.commandline
-        curl -OL https://github.com/groonga/groonga/releases/download/v${RELEASE_VERSION}/${ARCHIVE}
-        echo ${ARCHIVE}
+        curl -OL https://packages.groonga.org/windows/groonga/${ARCHIVE}
         7z x ${ARCHIVE}
         rm ${ARCHIVE}
         mv groonga-* ../groonga
