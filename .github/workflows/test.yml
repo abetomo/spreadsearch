@@ -10,11 +10,12 @@ jobs:
       matrix:
         node-version: [10.x, 12.x, 14.x, 16.x]
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@master
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
+        cache: 'npm'
     - name: Setup Groonga
       run: curl --silent --location https://github.com/groonga/groonga/raw/master/data/travis/setup.sh | sh
     - run: npm i -g npm
@@ -24,10 +25,11 @@ jobs:
   macos-test:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
       with:
         node-version: 16
+        cache: 'npm'
     - run: brew install groonga pkg-config
     - run: npm i -g npm
     - run: npm ci
@@ -38,10 +40,11 @@ jobs:
   windows-test:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
       with:
         node-version: 16
+        cache: 'npm'
     - name: Install Groonga
       shell: bash
       run: |
