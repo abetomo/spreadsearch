@@ -39,9 +39,15 @@ switch (type) {
     ss.dbClean()
     process.exit(0)
   case 'update':
-    ss.dbUpdate()
-      .then(() => process.exit(0))
-      .catch(err => console.error(err))
+    ;(async () => {
+      try {
+        await ss.dbUpdate()
+        process.exit(0)
+      } catch (err) {
+        console.error(err)
+        process.exit(1)
+      }
+    })()
     break
   case 'console':
     ss.console()
