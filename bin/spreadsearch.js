@@ -2,6 +2,7 @@
 
 'use strict'
 
+const process = require('process')
 const ss = new (require('..'))()
 const usage = `spreadsearch [NAME] init|clean|update|console
 spreadsearch [NAME] search QUERY
