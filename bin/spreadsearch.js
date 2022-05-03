@@ -36,9 +36,11 @@ switch (type) {
         .join('\n')
     )
     process.exit(0)
+    break
   case 'clean':
     ss.dbClean()
     process.exit(0)
+    break
   case 'update':
     ;(async () => {
       try {
@@ -56,6 +58,7 @@ switch (type) {
   case 'search':
     console.log(JSON.stringify(ss.search(query), null, '  '))
     process.exit(0)
+    break
   default:
     console.log(usage)
     process.exit(1)

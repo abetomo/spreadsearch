@@ -27,7 +27,7 @@
   "homepage": "https://github.com/abetomo/spreadsearch#readme",
   "devDependencies": {
     "jest": "^27.4.7",
-    "standard": "^16.0.4"
+    "standard": "^17.0.0"
   },
   "files": [
     "LICENSE",
